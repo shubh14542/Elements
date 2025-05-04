@@ -169,8 +169,9 @@ const Register = () => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setData((prev) => ({ ...prev, [name]: value }));
+    setData((preve) => ({ ...preve, [name]: value }));
   };
+  console.log("data",data)
 
   const validValue = Object.values(data).every((el) => el);
   const [showPassword, setShowPassword] = useState(false);
