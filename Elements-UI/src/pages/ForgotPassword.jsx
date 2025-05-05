@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { FaRegEye, FaRegEyeSlash } from 'react-icons/fa';
-import { MdEmail, MdLock } from 'react-icons/md';
+// import { FaRegEye, FaRegEyeSlash } from 'react-icons/fa';
+import { MdEmail} from 'react-icons/md';
 import toast from 'react-hot-toast';
 import Axios from '../utils/Axios';
 import SummaryApi from '../common/SummariApi';
@@ -12,7 +12,7 @@ const ForgotPassword = () => {
     email: "",
   });
 
-  const navigate = useNavigate();
+  const navigate = useNavigate(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -25,7 +25,7 @@ const ForgotPassword = () => {
     e.preventDefault();
     try {
       const response = await Axios({
-        ...SummaryApi.forgot_password,
+        ...SummaryApi.forgot_password_api,
         data: data,
       });
 

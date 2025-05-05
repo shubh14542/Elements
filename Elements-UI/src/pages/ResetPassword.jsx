@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import Axios from 'axios'
 import AxiosToastError from "../utils/AxiosToastError";
 import toast from 'react-hot-toast';
-import SummaryApi from "../common/SummaryApi";
+import SummaryApi from "../common/SummariApi";
 import { MdPassword } from 'react-icons/md';
 import { Link } from 'react-router-dom';
 import { FaRegEye, FaRegEyeSlash } from 'react-icons/fa';
@@ -97,14 +97,14 @@ const ResetPassword = () => {
 
           <form onSubmit={handleSubmit} className="space-y-6 text-white">
             {/* Email */}
-            <div className="flex items-center bg-gray-800/70 rounded-md border border-green-500 px-4 py-2 hover:border-green-400 transition">
-              <label htmlFor='newPassword' >New Password</label>
+            <label htmlFor='newPassword' >New Password</label>
+            <div className="flex items-center bg-gray-800/70 rounded-md border border-green-500 p-4   hover:border-green-400 transition">
               <MdPassword className="text-green-400 text-xl mr-3" />
               <input
                 type={showPassword ? "text" : "password"}
                 id="password"
                 name="newPassword"
-                className="w-full outline-none"
+                className="w-full bg-transparent outline-none placeholder-gray-400 "
                 value={data.newPassword}
                 onChange={handleChange}
                 placeholder="Enter your new password"
@@ -116,16 +116,16 @@ const ResetPassword = () => {
                 {showPassword ? <FaRegEyeSlash /> : <FaRegEye/>}
               </div>
             </div>
-
+              <br/>
             {/* Password */}
-            <div className="flex items-center bg-gray-800/70 rounded-md border border-green-500 px-4 py-2 hover:border-green-400 transition">
-              <label htmlFor='confirmPaassword'>Confirm Password</label>
+            <label htmlFor='confirmPaassword'  >Confirm Password</label>
+            <div className="flex items-center bg-gray-800/70 rounded-md border border-green-500 p-4  hover:border-green-400 transition">
               <MdPassword className="text-green-400 text-xl mr-3" />
               <input
                 type={showConfirmPassword ? 'text' : 'password'}
                 id='password'
                 name="confirmPassword"
-                value={data.confrimPassword}
+                value={data.confirmPassword}
                 onChange={handleChange}
                 placeholder="Enter your confirm password"
                 className="bg-transparent w-full outline-none text-white placeholder-gray-400"

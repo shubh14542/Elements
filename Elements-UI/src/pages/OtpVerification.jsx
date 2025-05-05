@@ -1,5 +1,4 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { MdEmail } from 'react-icons/md';
 import toast from 'react-hot-toast';
 import Axios from '../utils/Axios';
 import SummaryApi from '../common/SummariApi';
@@ -27,7 +26,7 @@ const OtpVerification = () => {
     e.preventDefault();
     try {
       const response = await Axios({
-        ...SummaryApi.forgot_password_otp,
+        ...SummaryApi.forgot_password_otp_api,
         data: {
           otp: data.join(""),
           email: location?.state?.email
@@ -44,7 +43,7 @@ const OtpVerification = () => {
         toast.success(response.data.message);
         setData(["", "", "", "", "", ""]);
         inputRef.current[0]?.focus();
-        navigate("/reset-password", 
+        navigate("/reset-password-api", 
       { state: {
         data : response.data,
          email: location?.state?.email } });
@@ -68,7 +67,7 @@ const OtpVerification = () => {
       <div className="absolute inset-0 bg-gradient-to-b from-black/80 to-black/90 z-0"></div>
 
       {/* Container */}
-      <section className="relative z-10 w-full max-w-md px-6">
+      <section className="relative z-10 w-full max-w-md mx-12">
         <div className="bg-black/60 border border-green-400 backdrop-blur-md shadow-lg rounded-2xl p-8 animate-fade-in">
           <h2 className="text-xl font-bold text-green-400 mb-8 tracking-wider neon-glow">
             Enter OTP
@@ -77,34 +76,47 @@ const OtpVerification = () => {
           <form onSubmit={handleSubmit} className="space-y-6 text-white">
             <label htmlFor='otp'>Enter your OTP:</label>
             <div className="flex items-center">
-              <MdEmail className="text-green-400 text-xl mr-3" />
-              <div className={`flex justify-between gap-3 mx-auto ${shake ? "animate-shake" : ""}`}>
-                {data.map((element, index) => (
-                  <input
-                    key={"otp" + index}
-                    type="text"
-                    inputMode="numeric"
-                    maxLength={1}
-                    value={data[index]}
-                    ref={(ref) => inputRef.current[index] = ref}
-                    onChange={(e) => {
-                      const value = e.target.value.replace(/[^0-9]/g, "");
-                      const newData = [...data];
-                      newData[index] = value;
-                      setData(newData);
-                      if (value && index < 5) {
-                        inputRef.current[index + 1].focus();
-                      }
-                    }}
-                    onKeyDown={(e) => {
-                      if (e.key === "Backspace" && !data[index] && index > 0) {
-                        inputRef.current[index - 1].focus();
-                      }
-                    }}
-                    className="w-12 h-12 md:w-14 md:h-14 text-center text-xl font-bold bg-gray-900 text-white border-2 border-green-500 rounded-md focus:outline-none focus:border-green-400 transition duration-200"
-                  />
-                ))}
-              </div>
+              <div className="flex justify-center items-center w-full">
+  <div className={`flex justify-between  gap-2 ${shake ? "animate-shake" : ""}`}>
+    {data.map((element, index) => (
+      <input
+        key={"otp" + index}
+        type="text"
+        inputMode="numeric"
+        maxLength={1}
+        value={data[index]}
+        ref={(ref) => inputRef.current[index] = ref}
+        onChange={(e) => {
+          const value = e.target.value.replace(/[^0-9]/g, "");
+          const newData = [...data];
+          newData[index] = value;
+          setData(newData);
+          if (value && index < 5) {
+            inputRef.current[index + 1].focus();
+          }
+        }}
+        onKeyDown={(e) => {
+          if (e.key === "Backspace" && !data[index] && index > 0) {
+            inputRef.current[index - 1].focus();
+          }
+        }}
+        className={`
+          w-10 h-10 md:w-14 md:h-14 
+          text-center text-2xl font-extrabold tracking-widest 
+          bg-black text-green-400 
+          border-2 border-green-500 rounded-xl 
+          shadow-md shadow-green-500/30
+          focus:outline-none focus:border-green-300
+          focus:shadow-lg focus:shadow-green-400/50 
+          transition-all duration-300 ease-in-out 
+          hover:scale-105 hover:shadow-green-400/40
+          ${shake ? "animate-shake" : ""}
+        `}
+      />
+    ))}
+  </div>
+</div>
+
             </div>
 
             <Link to="/forgot-password" className="inline-block text-right hover:text-green-500">
