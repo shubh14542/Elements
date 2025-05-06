@@ -34,7 +34,7 @@ const router =  createBrowserRouter([
             element : <OtpVerification/>
         },
         {
-            path : '/reset-password',
+            path : '/reset-password-api',
             element : <ResetPassword/>
         }
     ]

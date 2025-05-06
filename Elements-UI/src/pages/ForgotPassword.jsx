@@ -1,18 +1,18 @@
 import React, { useState } from 'react';
-// import { FaRegEye, FaRegEyeSlash } from 'react-icons/fa';
-import { MdEmail} from 'react-icons/md';
+import { FaRegEye, FaRegEyeSlash } from 'react-icons/fa';
+import { MdEmail, MdLock } from 'react-icons/md';
 import toast from 'react-hot-toast';
 import Axios from '../utils/Axios';
 import SummaryApi from '../common/SummariApi';
 import AxiosToastError from '../utils/AxiosToastError';
 import { useNavigate, Link } from 'react-router-dom';
-
 const ForgotPassword = () => {
   const [data, setData] = useState({
     email: "",
   });
 
-  const navigate = useNavigate(false);
+  const [showPassword, setShowPassword] = useState(false);
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -25,7 +25,7 @@ const ForgotPassword = () => {
     e.preventDefault();
     try {
       const response = await Axios({
-        ...SummaryApi.forgot_password_api,
+        ...SummaryApi.forgot_password,
         data: data,
       });
 
@@ -35,11 +35,8 @@ const ForgotPassword = () => {
 
       if (response.data.success) {
         toast.success(response.data.message);
-        navigate("/otp-verification",{
-          state : data
-        });
-        setData({ email: "" });
-       
+        setData({ email: "", password: "" });
+        navigate("/");
       }
 
     } catch (error) {
@@ -60,8 +57,8 @@ const ForgotPassword = () => {
       {/* Login Container */}
       <section className="relative z-10 w-full max-w-md px-6">
         <div className="bg-black/60 border border-green-400 backdrop-blur-md shadow-lg rounded-2xl p-8 animate-fade-in">
-          <h2 className="text-xl font-bold text-green-400 mb-8 tracking-wider neon-glow">
-            Forgot Password
+          <h2 className="text-3xl font-bold text-center text-green-400 mb-8 tracking-wider neon-glow">
+            Welcome Gamer
           </h2>
 
           <form onSubmit={handleSubmit} className="space-y-6 text-white">
@@ -78,8 +75,7 @@ const ForgotPassword = () => {
               />
             </div>
 
-            {/* Password */}
-                        <Link to={"/forgot-password"} className='inline-block text-right  hover:text-green-500' >Forgot Password ? </Link>
+            <Link to={"/otp-verification"} className='inline-block text-right  hover:text-green-500' >Forgot Password ? </Link>
             {/* Submit Button */}
             <button
               disabled={!validValue}
@@ -87,18 +83,18 @@ const ForgotPassword = () => {
                 ${validValue ? "bg-green-500 hover:bg-green-600" : "bg-gray-600 cursor-not-allowed"}
               `}
             >
-              Send OTP 
+              Send OTP
             </button>
           </form>
 
           {/* Register Link */}
           <p className="text-center text-sm text-gray-400 mt-6">
-            Already have account ? 
+            No account yet?
             <Link
-              to="/login"
+              to="/register"
               className="ml-1 text-green-400 hover:underline font-semibold"
             >
-              Login
+              Register Here
             </Link>
           </p>
         </div>

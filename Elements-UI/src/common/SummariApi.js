@@ -10,12 +10,12 @@ const SummaryApi = {
         url : '/api/user/login',
         method : 'post'
      },
-     forgot_password_api : {
-      url : '/api/user/forgot-password-api',
+     forgot_password : {
+      url : '/api/user/forgot-password',
       method : 'put'
    },
-   forgot_password_otp_api : {
-      url : '/api/user/forgot-password-otp-api',
+   forgot_password_otp : {
+      url : '/api/user/otp-verification',
       method : 'put'
    },
    reset_password_api : {
