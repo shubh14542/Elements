@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import { FaRegEye, FaRegEyeSlash } from 'react-icons/fa';
-import { MdEmail, MdLock } from 'react-icons/md';
+import { MdEmail } from 'react-icons/md';
 import toast from 'react-hot-toast';
 import Axios from '../utils/Axios';
 import SummaryApi from '../common/SummariApi';
@@ -11,7 +10,6 @@ const ForgotPassword = () => {
     email: "",
   });
 
-  const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -35,8 +33,8 @@ const ForgotPassword = () => {
 
       if (response.data.success) {
         toast.success(response.data.message);
-        setData({ email: "", password: "" });
-        navigate("/");
+        setData({ email: ""});
+        navigate("/otp-verification");
       }
 
     } catch (error) {
@@ -89,12 +87,12 @@ const ForgotPassword = () => {
 
           {/* Register Link */}
           <p className="text-center text-sm text-gray-400 mt-6">
-            No account yet?
+            Already have account?
             <Link
-              to="/register"
+              to="/login"
               className="ml-1 text-green-400 hover:underline font-semibold"
             >
-              Register Here
+              Login
             </Link>
           </p>
         </div>
