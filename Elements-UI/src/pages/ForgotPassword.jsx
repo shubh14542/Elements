@@ -33,8 +33,10 @@ const ForgotPassword = () => {
 
       if (response.data.success) {
         toast.success(response.data.message);
+        navigate("/otp-verification",{
+          state : data
+        });
         setData({ email: ""});
-        navigate("/otp-verification");
       }
 
     } catch (error) {
@@ -72,8 +74,6 @@ const ForgotPassword = () => {
                 className="bg-transparent w-full outline-none text-white placeholder-gray-400"
               />
             </div>
-
-            <Link to={"/otp-verification"} className='inline-block text-right  hover:text-green-500' >Forgot Password ? </Link>
             {/* Submit Button */}
             <button
               disabled={!validValue}

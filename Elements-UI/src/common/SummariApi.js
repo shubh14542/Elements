@@ -14,12 +14,12 @@ const SummaryApi = {
       url : '/api/user/forgot-password',
       method : 'put'
    },
-   forgot_password_otp : {
+   otp_verification : {
       url : '/api/user/otp-verification',
       method : 'put'
    },
-   reset_password_api : {
-      url : '/api/user/reset-password-api',
+   reset_password : {
+      url : '/api/user/reset-password',
       method : 'put'
    }
 }

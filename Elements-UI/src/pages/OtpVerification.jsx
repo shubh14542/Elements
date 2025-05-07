@@ -1,9 +1,10 @@
-import React, { useState, useRef, useEffect } from 'react';
-import toast from 'react-hot-toast';
-import Axios from '../utils/Axios';
-import SummaryApi from '../common/SummariApi';
-import AxiosToastError from '../utils/AxiosToastError';
-import { useNavigate, Link, useLocation } from 'react-router-dom';
+import React, { useState, useRef, useEffect } from "react";
+import { MdEmail } from "react-icons/md";
+import toast from "react-hot-toast";
+import Axios from "../utils/Axios";
+import SummaryApi from "../common/SummariApi";
+import AxiosToastError from "../utils/AxiosToastError";
+import { useNavigate, Link, useLocation } from "react-router-dom";
 
 const OtpVerification = () => {
   const [data, setData] = useState(["", "", "", "", "", ""]);
@@ -26,11 +27,11 @@ const OtpVerification = () => {
     e.preventDefault();
     try {
       const response = await Axios({
-        ...SummaryApi.forgot_password_otp_api,
+        ...SummaryApi.forgot_password,
         data: {
           otp: data.join(""),
-          email: location?.state?.email
-        }
+          email: location?.state?.email,
+        },
       });
 
       if (response.data.error) {
@@ -43,12 +44,10 @@ const OtpVerification = () => {
         toast.success(response.data.message);
         setData(["", "", "", "", "", ""]);
         inputRef.current[0]?.focus();
-        navigate("/reset-password-api", 
-      { state: {
-        data : response.data,
-         email: location?.state?.email } });
+        navigate("/reset-password", {
+          state: { email: location?.state?.email },
+        });
       }
-
     } catch (error) {
       AxiosToastError(error);
       setShake(true);
@@ -67,41 +66,46 @@ const OtpVerification = () => {
       <div className="absolute inset-0 bg-gradient-to-b from-black/80 to-black/90 z-0"></div>
 
       {/* Container */}
-      <section className="relative z-10 w-full max-w-md mx-12">
+      <section className="relative z-10 w-full max-w-md px-1">
         <div className="bg-black/60 border border-green-400 backdrop-blur-md shadow-lg rounded-2xl p-8 animate-fade-in">
           <h2 className="text-xl font-bold text-green-400 mb-8 tracking-wider neon-glow">
             Enter OTP
           </h2>
 
           <form onSubmit={handleSubmit} className="space-y-6 text-white">
-            <label htmlFor='otp'>Enter your OTP:</label>
-            <div className="flex items-center">
-              <div className="flex justify-center items-center w-full">
-  <div className={`flex justify-between  gap-2 ${shake ? "animate-shake" : ""}`}>
-    {data.map((element, index) => (
-      <input
-        key={"otp" + index}
-        type="text"
-        inputMode="numeric"
-        maxLength={1}
-        value={data[index]}
-        ref={(ref) => inputRef.current[index] = ref}
-        onChange={(e) => {
-          const value = e.target.value.replace(/[^0-9]/g, "");
-          const newData = [...data];
-          newData[index] = value;
-          setData(newData);
-          if (value && index < 5) {
-            inputRef.current[index + 1].focus();
-          }
-        }}
-        onKeyDown={(e) => {
-          if (e.key === "Backspace" && !data[index] && index > 0) {
-            inputRef.current[index - 1].focus();
-          }
-        }}
-        className={`
-          w-10 h-10 md:w-14 md:h-14 
+            <label htmlFor="otp">Enter your OTP:</label>
+            <div className="flex justify-center items-center w-full">
+            <MdEmail className="text-green-400 text-xl mr-3" />
+
+              <div
+                className={`flex justify-between gap-2  ${
+                  shake ? "animate-shake" : ""
+                }`}
+              >
+                {data.map((element, index) => (
+                  <input
+                    key={"otp" + index}
+                    type="text"
+                    inputMode="numeric"
+                    maxLength={1}
+                    value={data[index]}
+                    ref={(ref) => (inputRef.current[index] = ref)}
+                    onChange={(e) => {
+                      const value = e.target.value.replace(/[^0-9]/g, "");
+                      const newData = [...data];
+                      newData[index] = value;
+                      setData(newData);
+                      if (value && index < 5) {
+                        inputRef.current[index + 1].focus();
+                      }
+                    }}
+                    onKeyDown={(e) => {
+                      if (e.key === "Backspace" && !data[index] && index > 0) {
+                        inputRef.current[index - 1].focus();
+                      }
+                    }}
+                    className={`
+          w-12 h-12 md:w-14 md:h-14 
           text-center text-2xl font-extrabold tracking-widest 
           bg-black text-green-400 
           border-2 border-green-500 rounded-xl 
@@ -112,21 +116,26 @@ const OtpVerification = () => {
           hover:scale-105 hover:shadow-green-400/40
           ${shake ? "animate-shake" : ""}
         `}
-      />
-    ))}
-  </div>
-</div>
-
+                  />
+                ))}
+              </div>
             </div>
 
-            <Link to="/forgot-password" className="inline-block text-right hover:text-green-500">
+            <Link
+              to="/forgot-password"
+              className="inline-block text-right hover:text-green-500"
+            >
               Forgot Password?
             </Link>
 
             <button
               disabled={!validValue}
               className={`w-full py-3 rounded-md font-semibold text-lg tracking-wide transition 
-                ${validValue ? "bg-green-500 hover:bg-green-600" : "bg-gray-600 cursor-not-allowed"}
+                ${
+                  validValue
+                    ? "bg-green-500 hover:bg-green-600"
+                    : "bg-gray-600 cursor-not-allowed"
+                }
               `}
             >
               Verify OTP
