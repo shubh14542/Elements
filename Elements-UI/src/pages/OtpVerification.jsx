@@ -45,7 +45,9 @@ const OtpVerification = () => {
         setData(["", "", "", "", "", ""]);
         inputRef.current[0]?.focus();
         navigate("/reset-password", {
-          state: { email: location?.state?.email },
+          state: {
+            data : response.data, 
+            email: location?.state?.email },
         });
       }
     } catch (error) {
