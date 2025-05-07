@@ -11,7 +11,7 @@ userRouter.get('/logout',auth,logOutController)
 userRouter.put('/upload-avtar',auth,upload.single('avtar'),uploadAvtar)
 userRouter.put('/update-user',auth,updateUserDetails)
 userRouter.put('/forgot-password',forgotPasswordController)
-userRouter.put('/forgot-password-otp',verifyForgotPasswordOtp)
+userRouter.put('/otp-verification',verifyForgotPasswordOtp)
 userRouter.put('/reset-password',resetPassword)
 userRouter.post('/refresh-token',refreshToken)
 export default userRouter

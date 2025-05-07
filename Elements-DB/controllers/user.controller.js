@@ -282,7 +282,7 @@ export async function forgotPasswordController(req,res){
         const otp = generateOTP()
         const expireTime = new Date() + 60*60*1000
         const update = await userModel.findByIdAndUpdate(user._id,{
-            forgot_password_otp : otp,
+            otp_verification : otp,
             forgot_password_expiry : new Date(expireTime).toISOString()
         })
 
@@ -343,7 +343,7 @@ export async function verifyForgotPasswordOtp(req,res){
             })
         }
 
-        if(otp !== user.forgot_password_otp){
+        if(otp !== user.otp_verification){
             return res.status(400).json({
                 message : "invalid otp",
                 error : true,
