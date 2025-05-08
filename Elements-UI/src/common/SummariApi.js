@@ -1,3 +1,4 @@
+
 export const baseURL = "http://localhost:5000"
 
 const SummaryApi = {
@@ -21,6 +22,10 @@ const SummaryApi = {
    reset_password : {
       url : '/api/user/reset-password',
       method : 'put'
-   }
+   },
+   userDetails : {
+      url :   'api/user/user-details',
+      method : 'get'
+    }
 }
 export default SummaryApi
