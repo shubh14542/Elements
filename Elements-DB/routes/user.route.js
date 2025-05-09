@@ -6,7 +6,7 @@ const userRouter = Router()
 
 userRouter.post('/register',registerUserController) 
 userRouter.post('/verify-email', verifyEmailController)
-userRouter.post('/login',loginController)
+userRouter.post('/login', loginController)
 userRouter.get('/logout',auth,logOutController)
 userRouter.put('/upload-avtar',auth,upload.single('avtar'),uploadAvtar)
 userRouter.put('/update-user',auth,updateUserDetails)

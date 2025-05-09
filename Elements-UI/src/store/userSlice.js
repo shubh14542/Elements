@@ -29,9 +29,21 @@ const userSlice = createSlice({
           state.order_history = action.payload?.order_history
           state.shopping_cart = action.payload?.shopping_cart
 
+        },
+        logout : (state,action) =>{
+            state._id = ""
+            state.name = ""
+            state.email = ""
+            state.mobile = ""
+            state.verify_email = ""
+            state.last_login_date = ""
+            state.status = ""
+            state.role = ""
+            state.order_history = []
+            state.shopping_cart = []
         }
     }
 })
 
-export const {setUserDetails} = userSlice.actions
+export const {setUserDetails,logout} = userSlice.actions
 export default userSlice.reducer
