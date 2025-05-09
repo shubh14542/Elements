@@ -30,6 +30,10 @@ const SummaryApi = {
    logout : {
       url : '/api/user/logout',
       method : 'get'
+   },
+   refresh_token : {
+         url : '/api/user/refresh-token',
+         method : 'post'
    }
 }
 export default SummaryApi

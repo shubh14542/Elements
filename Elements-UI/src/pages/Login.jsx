@@ -43,7 +43,8 @@ const Login = () => {
 
         const userDetails = await fetchUserDetails()
         dispatch(setUserDetails(userDetails.data))
-
+        localStorage.setItem("accessToken",response.data.data.accessToken)
+        localStorage.setItem("refreshToken",response.data.data.refreshToken)
         setData({ email: "", password: "" });
         navigate("/");
       }

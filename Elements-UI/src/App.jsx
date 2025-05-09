@@ -3,7 +3,7 @@ import {Outlet} from 'react-router-dom'
 import './App.css';
 // import Header from './components/header';
 import Header from './components/header';
-import toast, {Toaster} from 'react-hot-toast'
+import  {Toaster} from 'react-hot-toast'
 import Footer from './components/footer';
 import { useEffect } from 'react';
 import fetchUserDetails from './utils/fetchUserDetails';
@@ -22,7 +22,7 @@ function App() {
 
   useEffect(()=>{
       fetchUser()
-  },[])
+  })
 
   return (
    <>

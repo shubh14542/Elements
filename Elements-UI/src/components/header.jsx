@@ -18,6 +18,14 @@ const Header = () => {
       setOpenUserMenu(false);
     }
 
+    const handleMobileUser = () =>{
+        if(!user._id){
+          navigate("/login")
+        }
+
+        navigate("/user-mobile")
+    }
+
   return (
     <header className="h-28 sticky top-0 z-50 bg-[#0d0d0d]/90 backdrop-blur-md pt-7 px-2 border-b border-[#00ffcc33] shadow-md shadow-[#00ffcc22]">
       <div className="container mx-auto px-4 flex items-center justify-between font-sans">
@@ -26,6 +34,13 @@ const Header = () => {
           <span className="hidden lg:block">⚡ Elements</span>
           <span className="lg:hidden">⚡E</span>
         </Link>
+
+             {/* Mobile */}
+        <div className="lg:hidden text-[#00ffcc]">
+         <button className="cursor-pointer"  onClick={handleMobileUser} > 
+           <FaUserCircle size={28} />
+         </button>
+        </div>
 
         {/* Desktop User Panel */}
         <div className="hidden lg:flex items-center gap-6">
@@ -56,10 +71,8 @@ const Header = () => {
           )}
         </div>
 
-        {/* Mobile Icon (Optional) */}
-        <div className="lg:hidden text-[#00ffcc]">
-          <FaUserCircle size={28} />
-        </div>
+     
+        
       </div>
     </header>
   );
