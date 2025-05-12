@@ -34,6 +34,14 @@ const SummaryApi = {
    refresh_token : {
          url : '/api/user/refresh-token',
          method : 'post'
+   },
+   upload_Avtar : {
+      url : '/api/user/upload-avtar',
+      method : 'put'
+   },
+   update_user : {
+      url : '/api/user/update-user',
+      method : 'put'
    }
 }
 export default SummaryApi

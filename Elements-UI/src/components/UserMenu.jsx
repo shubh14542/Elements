@@ -34,8 +34,14 @@ const UserMenu = ({ close }) => {
     }
   };
 
+  const handleClose = () =>{
+    if(close){
+        close()
+    }
+  }
+
   return (
-    <div className="w-72 p-5 rounded-2xl bg-[#0a0a0a] backdrop-blur-lg border border-[#00ffcc]/20 shadow-[0_0_25px_rgba(0,255,204,0.08)] text-white">
+    <div className="w-70 p-5 rounded-2xl bg-[#0a0a0a] backdrop-blur-lg border border-[#00ffcc]/20 shadow-[0_0_25px_rgba(0,255,204,0.08)] text-white">
       <div className="text-xl font-extrabold mb-1 text-[#00ffcc] tracking-wider uppercase">
         My Account
       </div>
@@ -44,7 +50,7 @@ const UserMenu = ({ close }) => {
           {" "}
           {user?.name || user?.mobile}{" "}
         </span>{" "}
-        <Link to={"/dashboard/profile"} className="hover:text-green-500">
+        <Link to={"/dashboard/profile"} onClick={handleClose} className="hover:text-green-500">
           <FiExternalLink size={15} />
         </Link>
       </div>
@@ -53,14 +59,14 @@ const UserMenu = ({ close }) => {
 
       <div className="text-sm grid gap-3">
         <Link
-          to={"/dashboard/bookings"}
+          to={"/dashboard/bookings"} onClick={handleClose}
           className="px-2 py-1 rounded hover:bg-[#00ffcc]/10 hover:text-[#00ffcc] transition-all duration-200"
         >
           🎮&nbsp;My Bookings
         </Link>
 
         <Link
-          to={"/dashboard/addresses"}
+          to={"/dashboard/addresses"} onClick={handleClose}
           className="px-2 py-1 rounded hover:bg-[#00ffcc]/10 hover:text-[#00ffcc] transition-all duration-200"
         >
           📍&nbsp;Saved Addresses

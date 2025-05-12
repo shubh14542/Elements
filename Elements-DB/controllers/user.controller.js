@@ -212,13 +212,22 @@ export async function logOutController(req,res){
 // upload user avtar
 export async function uploadAvtar(req,res){
     try {
-        const userId = req.userId
-        const image = req.file
+        const userId = req.userId //auth middleware
+        const image = req.file // multer middleware
         const upload =  await uploadImageCloudinary(image)
+
+        const updateUser = await userModel.findByIdAndUpdate(userId,{
+            avtar : upload.url
+        })
 
         return res.json({
             message : "upload image",
-            data : upload 
+            error : false,
+            success : true,
+            data : {
+                _id : userId,
+                avtar : upload.url
+            }
         })
 
     } catch (error) {
@@ -435,7 +444,7 @@ export async function resetPassword(req,res){
 
 export async function refreshToken(req,res){
     try {
-        const refreshToken = req.cookies.refreshToken || req?.headers?.authorization?.split(" ")[1] 
+        const refreshToken = req.cookies.refreshToken || req?.headers?.authorization?.split("")[1] 
 
         if(!refreshToken){
             return res.status(401).json({
