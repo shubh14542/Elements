@@ -1,8 +1,8 @@
 import React from 'react'
 import { useState } from 'react'
 import { IoClose } from "react-icons/io5";
-
-const UploadController = ({close}) => {
+import uploadImage from '../utils/uploadImage';
+const UploadDevice = ({close}) => {
     const [data,setData] = useState({
         name : "",
         images : ""
@@ -23,7 +23,24 @@ const UploadController = ({close}) => {
         e.preventDefault()
     }
 
-    const handleUploadDevice = () =>{
+    const handleUploadDeviceImages = async (e) =>{
+        const file = e.target.files[0]
+
+        if(!file){
+            return 
+        }
+
+        const response = await uploadImage(file)
+
+        const {data : imageResponse} = response 
+
+        setData((preve)=>{
+            return {
+                ...preve,
+                images : imageResponse.data.url
+            }
+        })
+
 
     }
 
@@ -53,15 +70,28 @@ const UploadController = ({close}) => {
                  <p>Image</p>
                 <div className='flex gap-4 flex-col lg:flex-row items-center ' >
                     <div className='border bg-blue-50 h-36 w-full lg:w-36 flex items-center justify-center text-neutral-500 rounded' >
-                        <p className='text-sm' >No Image</p>
+                        {
+                            data.images ?  (
+                                <img
+                                alt='device' 
+                                src={data.images}
+                                className='w-full  h-full object-cover'
+                                />
+                            )
+                             : 
+                            (
+                                <p className='text-sm' >No Image</p>
+                             )
+                        }
                     </div>
                     <label htmlFor='uploadControllerImage' >
-                        <div disabled={!data.name} className={`
+                        <div  className={`
                         ${!data.name?"bg-gray-400" : "bg-orange-400" }
                         px-4 py-1 border rounded cursor-pointer
                         `} >Upload Image</div>        
                         <input
-                        onChange={handleUploadDevice}
+                        disabled={!data.name}
+                        onChange={handleUploadDeviceImages}
                         type='file'
                         id='uploadControllerImage'
                         className='hidden'
@@ -76,4 +106,4 @@ const UploadController = ({close}) => {
   )
 }
 
-export default UploadController
+export default UploadDevice

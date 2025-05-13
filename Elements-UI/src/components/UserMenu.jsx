@@ -63,11 +63,11 @@ const UserMenu = ({ close }) => {
 
       <div className="text-sm grid gap-3">
         <Link
-          to={"/dashboard/controllers"}
+          to={"/dashboard/device"}
           onClick={handleClose}
           className="px-2 py-1 rounded hover:bg-[#00ffcc]/10 hover:text-[#00ffcc] transition-all duration-200"
         >
-          🎮&nbsp;Controllers
+          🎮&nbsp;Devices
         </Link>
 
          <Link

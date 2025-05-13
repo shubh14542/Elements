@@ -12,7 +12,7 @@ import Profile from '../pages/Profile'
 import Dashboard from '../layout/Dashboard'
 import Bookings from '../pages/Bookings'
 import Addresses from '../pages/Addresses'
-import Controller from '../pages/Controller'
+import Device from '../pages/Device'
 import Slots from '../pages/Slots'
 // import Signup from '../pages/Signup'
 const router =  createBrowserRouter([
@@ -65,8 +65,8 @@ const router =  createBrowserRouter([
                     element : <Addresses/>
                 },
                 {
-                    path : 'controllers',
-                    element : <Controller/>
+                    path : 'device',
+                    element : <Device/>
                 },
                 {
                     path : 'slots',

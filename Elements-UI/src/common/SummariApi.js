@@ -42,6 +42,14 @@ const SummaryApi = {
    update_user : {
       url : '/api/user/update-user',
       method : 'put'
+   },
+   add_device : {
+      url : '/api/device/add-Device',
+      method : 'post'
+   },
+   upload_image : {
+      url : '/api/file/upload',
+      method : 'post'
    }
 }
 export default SummaryApi
