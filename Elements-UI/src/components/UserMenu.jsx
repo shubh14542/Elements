@@ -34,11 +34,11 @@ const UserMenu = ({ close }) => {
     }
   };
 
-  const handleClose = () =>{
-    if(close){
-        close()
+  const handleClose = () => {
+    if (close) {
+      close();
     }
-  }
+  };
 
   return (
     <div className="w-70 p-5 rounded-2xl bg-[#0a0a0a] backdrop-blur-lg border border-[#00ffcc]/20 shadow-[0_0_25px_rgba(0,255,204,0.08)] text-white">
@@ -50,7 +50,11 @@ const UserMenu = ({ close }) => {
           {" "}
           {user?.name || user?.mobile}{" "}
         </span>{" "}
-        <Link to={"/dashboard/profile"} onClick={handleClose} className="hover:text-green-500">
+        <Link
+          to={"/dashboard/profile"}
+          onClick={handleClose}
+          className="hover:text-green-500"
+        >
           <FiExternalLink size={15} />
         </Link>
       </div>
@@ -59,14 +63,32 @@ const UserMenu = ({ close }) => {
 
       <div className="text-sm grid gap-3">
         <Link
-          to={"/dashboard/bookings"} onClick={handleClose}
+          to={"/dashboard/controllers"}
+          onClick={handleClose}
+          className="px-2 py-1 rounded hover:bg-[#00ffcc]/10 hover:text-[#00ffcc] transition-all duration-200"
+        >
+          🎮&nbsp;Controllers
+        </Link>
+
+         <Link
+          to={"/dashboard/slots"}
+          onClick={handleClose}
+          className="px-2 py-1 rounded hover:bg-[#00ffcc]/10 hover:text-[#00ffcc] transition-all duration-200"
+        >
+          🎮&nbsp;Slots
+        </Link>
+
+        <Link
+          to={"/dashboard/bookings"}
+          onClick={handleClose}
           className="px-2 py-1 rounded hover:bg-[#00ffcc]/10 hover:text-[#00ffcc] transition-all duration-200"
         >
           🎮&nbsp;My Bookings
         </Link>
 
         <Link
-          to={"/dashboard/addresses"} onClick={handleClose}
+          to={"/dashboard/addresses"}
+          onClick={handleClose}
           className="px-2 py-1 rounded hover:bg-[#00ffcc]/10 hover:text-[#00ffcc] transition-all duration-200"
         >
           📍&nbsp;Saved Addresses

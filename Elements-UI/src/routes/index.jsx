@@ -12,6 +12,8 @@ import Profile from '../pages/Profile'
 import Dashboard from '../layout/Dashboard'
 import Bookings from '../pages/Bookings'
 import Addresses from '../pages/Addresses'
+import Controller from '../pages/Controller'
+import Slots from '../pages/Slots'
 // import Signup from '../pages/Signup'
 const router =  createBrowserRouter([
    {
@@ -61,6 +63,14 @@ const router =  createBrowserRouter([
                 {
                     path : 'addresses',
                     element : <Addresses/>
+                },
+                {
+                    path : 'controllers',
+                    element : <Controller/>
+                },
+                {
+                    path : 'slots',
+                    element : <Slots/>
                 }
             ]
         }

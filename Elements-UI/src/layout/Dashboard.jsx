@@ -50,8 +50,7 @@ const Dashboard = () => {
         </main>
 
       </div>
-    </section>
-  );
+    </section>  );
 };
 
 export default Dashboard;

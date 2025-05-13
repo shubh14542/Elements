@@ -33,7 +33,7 @@ const userSlice = createSlice({
 
         },
         updateAvtar : (state,action)=>{
-            state.avtar = action.payload ?.avtar 
+            state.avtar = action.payload?.avtar
         }        ,
         logout : (state,action) =>{
             state._id = ""
