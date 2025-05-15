@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const controllerSchema = new mongoose.Schema({
+const deviceSchema = new mongoose.Schema({
     name : {
         type : String,
         default : ""
@@ -13,9 +13,9 @@ const controllerSchema = new mongoose.Schema({
     timestamps : true
 })
 
-const controllerModel = mongoose.model('Controller',controllerSchema)
+const deviceModel = mongoose.model('device',deviceSchema)
 
-export default  controllerModel
+export default  deviceModel
 // import mongoose from "mongoose";
 
 // const controller=Schema = new mongoose.Schema({

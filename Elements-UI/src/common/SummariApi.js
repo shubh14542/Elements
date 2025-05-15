@@ -44,12 +44,16 @@ const SummaryApi = {
       method : 'put'
    },
    add_device : {
-      url : '/api/device/add-Device',
+      url : '/api/device/add-device',
       method : 'post'
    },
    upload_image : {
       url : '/api/file/upload',
       method : 'post'
+   },
+   get_device : {
+      url : 'api/device/get',
+      method : 'get'
    }
 }
 export default SummaryApi

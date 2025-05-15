@@ -1,9 +1,10 @@
 import { Router } from "express";
 import auth from "../middleware/auth.js";
-import { AddDeviceController } from "../controllers/device.controller.js";
+import { AddDevice, getDevice} from "../controllers/device.controller.js";
 
 const deviceRouter = Router()
 
-deviceRouter.post("/add-Device",auth,AddDeviceController)
+deviceRouter.post("/add-device",auth,AddDevice)
+deviceRouter.get("/get",getDevice)
 
 export default deviceRouter

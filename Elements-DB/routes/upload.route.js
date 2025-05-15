@@ -6,4 +6,4 @@ const uploadRouter = Router()
 
 uploadRouter.post("/upload",auth,upload.single("image"), uploadImage)
 
-export default uploadRouter
+export default uploadRouter 

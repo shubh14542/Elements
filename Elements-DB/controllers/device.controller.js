@@ -1,6 +1,6 @@
-import controllerModel from "../models/controller.model.js";
+import deviceModel from "../models/device.model.js";
 
-export  const AddDeviceController = async (req,res) => {
+export  const AddDevice = async (req,res) => {
     try {
         const {name,image } = req.body;
 
@@ -12,7 +12,7 @@ export  const AddDeviceController = async (req,res) => {
             })
         }
 
-        const addDevice = new  controllerModel({
+        const addDevice = new  deviceModel({
             name,
             image
         })
@@ -40,6 +40,25 @@ export  const AddDeviceController = async (req,res) => {
             message : error.message || message ,
             error : true,
             success : false 
+        })
+    }
+}
+
+export const getDevice = async (req,res) => {
+    try {
+        const data = await deviceModel.find()
+
+        return res.json({
+            data : data,
+            error : false,
+            success : true
+        })
+
+    } catch (error) {
+        return res.status(500).json({
+            message : error.message || message ,
+            error : true,
+            success : false
         })
     }
 }
