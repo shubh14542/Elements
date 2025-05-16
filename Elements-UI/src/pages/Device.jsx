@@ -11,6 +11,10 @@ const Device = () => {
   const [loading, setLoading] = useState(false);
   const [deviceData, setDeviceData] = useState([]);
   const [openEdit,setOpenEdit] = useState(false)
+  const [editData,setEditData] = useState({
+    name : "",
+    image : ""
+  })
   const fetchDevice = async () => {
     try {
       setLoading(true);
@@ -29,6 +33,8 @@ const Device = () => {
   useEffect(() => {
     fetchDevice();
   }, []);
+
+  console.log("deviceData",deviceData)
 
   return (
     <section className="text-white min-h-screen font-sans">
@@ -50,7 +56,9 @@ const Device = () => {
 
       {/* Device Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6 px-2 py-1">
-        {deviceData.map((device, index) => (
+        {
+        deviceData.map((device, index) => {
+         return (
           <div
             key={index}
             className="bg-[#111]/60 backdrop-blur-md w-36 border border-white/10 rounded-xl shadow-[0_0_25px_rgba(0,255,204,0.08)] p-1 flex flex-col items-center hover:scale-105 transition-transform duration-200"
@@ -66,11 +74,13 @@ const Device = () => {
             <div className="items-center gap-6 h-12 flex gap-3" >
               <button onClick={()=>{
                 setOpenEdit(true)
+                setEditData(device)
               }} className="flex-1 bg-green-100 hover:bg-green-200 text-green-600 p-1 px-2 rounded " >Edit</button>
               <button className="flex-1 bg-red-100 hover:bg-red-200 text-red-600 p-1 px-2 rounded" >Delete</button>
             </div>
           </div>
-        ))}
+        )
+        })}
       </div>
 
       {/* Loader */}
@@ -86,7 +96,7 @@ const Device = () => {
 
       {
         openEdit && (
-          <EditDevice close={()=>setOpenEdit(false)} />
+          <EditDevice data={editData} close={()=>setOpenEdit(false)}  fetchData={fetchDevice} />
         )
       }
     </section>

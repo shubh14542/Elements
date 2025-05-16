@@ -65,10 +65,10 @@ export const getDevice = async (req,res) => {
 
 export const updateDevice = async (req,res) =>{
     try {
-        const {deviceId, name, image} = req.body 
+        const {_id, name, image} = req.body 
 
         const update = await deviceModel.updateOne({
-            _id : deviceId,
+            _id : _id,
             },{
                 name,
                 image        

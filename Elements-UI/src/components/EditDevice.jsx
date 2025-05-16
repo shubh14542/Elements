@@ -6,8 +6,13 @@ import uploadImage from '../utils/uploadImage';
 import toast from "react-hot-toast";
 import AxiosToastError from "../utils/AxiosToastError";
 import Axios from "../utils/Axios";
-const EditDevice = ({close,fetchData}) => {
-  const [data, setData] = useState({ name: "", image: "" });
+const EditDevice = ({close, fetchData, data : deviceData}) => {
+  const [data, setData] = useState(
+    { 
+    _id : deviceData._id ,
+      name: deviceData.name,
+      image: deviceData.image
+     });
   const [loading, setLoading] = useState(false);
 
   const handleChange = (e) => {
@@ -19,8 +24,9 @@ const EditDevice = ({close,fetchData}) => {
     e.preventDefault();
     try {
       setLoading(true);
-      const response = await Axios({ ...SummaryApi.add_device, data });
+      const response = await Axios({ ...SummaryApi.update_device, data });
       const { data: responseData } = response;
+      setLoading(false);
       if (responseData.success) {
         toast.success(responseData.message);
         close();
@@ -35,8 +41,10 @@ const EditDevice = ({close,fetchData}) => {
    const handleUploadDeviceImages = async (e) => {
       const file = e.target.files[0];
       if (!file) return;
+      setLoading(true)
       const response = await uploadImage(file);
       const { data: imageResponse } = response;
+      setLoading(false)
       setData((prev) => ({ ...prev, image: imageResponse.data.url }));
     };
   return (
@@ -45,7 +53,7 @@ const EditDevice = ({close,fetchData}) => {
         {/* Header */}
         <div className="flex justify-between items-center border-b border-[#00ffc3]/10 pb-3 mb-4">
           <h2 className="text-2xl font-bold text-[#00ffc3] tracking-widest uppercase">
-            Add New Device
+            Device
           </h2>
           <button
             onClick={close}
@@ -104,7 +112,10 @@ const EditDevice = ({close,fetchData}) => {
                           }
                         `}
                 >
-                  Upload Image
+                  {
+                    loading ? "Uploading..." : "Upload Image"
+                  }
+                  
                 </div>
                 <input
                   disabled={!data.name}
@@ -129,7 +140,7 @@ const EditDevice = ({close,fetchData}) => {
                       }
                     `}
           >
-            {loading ? "Adding Device..." : "Add Device"}
+            {loading ? "Updating Device..." : "Update Device"}
           </button>
         </form>
       </div>
