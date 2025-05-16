@@ -1,12 +1,12 @@
-import React, { useState } from 'react';
+import React from "react";
+import SummaryApi from "../common/SummariApi";
+import { useState } from "react";
 import { IoClose } from "react-icons/io5";
 import uploadImage from '../utils/uploadImage';
+import toast from "react-hot-toast";
+import AxiosToastError from "../utils/AxiosToastError";
 import Axios from "../utils/Axios";
-import SummaryApi from '../common/SummariApi';
-import toast from 'react-hot-toast';
-import AxiosToastError from '../utils/AxiosToastError';
-
-const UploadDevice = ({ close, fetchData }) => {
+const EditDevice = ({close,fetchData}) => {
   const [data, setData] = useState({ name: "", image: "" });
   const [loading, setLoading] = useState(false);
 
@@ -32,35 +32,37 @@ const UploadDevice = ({ close, fetchData }) => {
       setLoading(false);
     }
   };
-
-  const handleUploadDeviceImages = async (e) => {
-    const file = e.target.files[0];
-    if (!file) return;
-    const response = await uploadImage(file);
-    const { data: imageResponse } = response;
-    setData(prev => ({ ...prev, image: imageResponse.data.url }));
-  };
-
+   const handleUploadDeviceImages = async (e) => {
+      const file = e.target.files[0];
+      if (!file) return;
+      const response = await uploadImage(file);
+      const { data: imageResponse } = response;
+      setData((prev) => ({ ...prev, image: imageResponse.data.url }));
+    };
   return (
     <section className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-70 backdrop-blur-sm p-4">
       <div className="w-full max-w-xl bg-[#0d0d0d] border border-[#00ffc3]/20 rounded-2xl shadow-[0_0_40px_#00ffc3]/20 p-6 text-white relative">
-        
         {/* Header */}
         <div className="flex justify-between items-center border-b border-[#00ffc3]/10 pb-3 mb-4">
           <h2 className="text-2xl font-bold text-[#00ffc3] tracking-widest uppercase">
             Add New Device
           </h2>
-          <button onClick={close} className="text-gray-300 hover:text-red-500 transition">
+          <button
+            onClick={close}
+            className="text-gray-300 hover:text-red-500 transition"
+          >
             <IoClose size={28} />
           </button>
         </div>
 
         {/* Form */}
         <form onSubmit={handleSubmit} className="space-y-6">
-          
           {/* Device Name */}
           <div>
-            <label htmlFor="deviceName" className="text-sm text-[#aaa] mb-1 block">
+            <label
+              htmlFor="deviceName"
+              className="text-sm text-[#aaa] mb-1 block"
+            >
               Device Name
             </label>
             <input
@@ -81,7 +83,11 @@ const UploadDevice = ({ close, fetchData }) => {
               {/* Preview */}
               <div className="w-full lg:w-36 h-36 flex items-center justify-center bg-[#111] border border-[#00ffc3]/10 rounded-lg">
                 {data.image ? (
-                  <img src={data.image} alt="device" className="w-full h-full object-contain" />
+                  <img
+                    src={data.image}
+                    alt="device"
+                    className="w-full h-full object-contain"
+                  />
                 ) : (
                   <p className="text-sm text-gray-500">No Image</p>
                 )}
@@ -89,9 +95,15 @@ const UploadDevice = ({ close, fetchData }) => {
 
               {/* Upload */}
               <label htmlFor="uploadDeviceImage" className="cursor-pointer">
-                <div className={`px-4 py-2 rounded-lg text-sm font-semibold transition
-                  ${!data.name ? 'bg-gray-500 text-gray-300 cursor-not-allowed' : 'bg-[#ff4b9b] hover:bg-[#ff358f] text-white'}
-                `}>
+                <div
+                  className={`px-4 py-2 rounded-lg text-sm font-semibold transition
+                          ${
+                            !data.name
+                              ? "bg-gray-500 text-gray-300 cursor-not-allowed"
+                              : "bg-[#ff4b9b] hover:bg-[#ff358f] text-white"
+                          }
+                        `}
+                >
                   Upload Image
                 </div>
                 <input
@@ -110,8 +122,12 @@ const UploadDevice = ({ close, fetchData }) => {
             type="submit"
             disabled={loading || !(data.name && data.image)}
             className={`w-full py-3 rounded-xl font-bold tracking-wide transition
-              ${data.name && data.image ? "bg-[#00ffc3] text-black hover:bg-[#00e6b6]" : "bg-gray-600 text-gray-300 cursor-not-allowed"}
-            `}
+                      ${
+                        data.name && data.image
+                          ? "bg-[#00ffc3] text-black hover:bg-[#00e6b6]"
+                          : "bg-gray-600 text-gray-300 cursor-not-allowed"
+                      }
+                    `}
           >
             {loading ? "Adding Device..." : "Add Device"}
           </button>
@@ -121,4 +137,4 @@ const UploadDevice = ({ close, fetchData }) => {
   );
 };
 
-export default UploadDevice;
+export default EditDevice;

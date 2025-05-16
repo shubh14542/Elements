@@ -54,6 +54,10 @@ const SummaryApi = {
    get_device : {
       url : 'api/device/get',
       method : 'get'
+   },
+   update_device : {
+      url : 'api/device/update',
+      method : 'put'
    }
 }
 export default SummaryApi

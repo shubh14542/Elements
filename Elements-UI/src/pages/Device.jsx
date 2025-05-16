@@ -1,102 +1,16 @@
-// import React, { useEffect, useState } from "react";
-// import UploadDevice from "../components/UploadDevice";
-// import Loading from "../components/Loading";
-// import NoData from "../components/NoData";
-// import Axios from "../utils/Axios";
-// import SummaryApi from "../common/SummariApi";
-// const Device = () => {
-//     const [openUploadDevice,setOpenUploadDevice] = useState(false)
-
-//     const [loading,setLoading] = useState(false)
-
-//     const [deviceData,setDeviceData] = useState([])
-
-//     const fetchDevice = async () =>{
-//       try {
-//         setLoading(true)
-//         const response = await Axios ({
-//            ...SummaryApi.get_device
-//         })
-//         const { data : responseData} = response
-
-//         if(responseData.success){
-//           setDeviceData(responseData.data)
-//         }
-//       } catch (error) {
-        
-//       }finally{
-//         setLoading(false)
-//       }
-//     }
-
-//     useEffect(()=>{
-//         fetchDevice()
-//     },[])
-
-//   return (
-//     <section >
-//       <div className=" shadow-md flex items-center justify-between" >
-//         <h1 className="font-semibold"> Devices </h1>
-//         <button onClick={()=>setOpenUploadDevice(true)} className="text-sm border  bg-indigo-300 hover:bg-indigo-700 px-3 py-1 rounded ">
-          
-//           Add Device
-//         </button>
-//       </div>
-//     {
-//       !deviceData[0] && !loading && (
-//         <NoData/>
-//       )
-//     }
-
-//   <div className="p-4 grid grid-cols-1 gap-4 md:grid-cols-4 gap-4 lg:grid-cols-5 gap-4" >
-//       {
-//       deviceData.map((device,index)=>{
-//         return (
-//           <div className="w-40  bg-green-400 rounded shadow-md  flex flex-col items-center justify-center " >
-//               <img
-//                 alt={device.name}
-//                 src={device.image}
-//                 className="w-52 object-scale-down"
-//               />
-//               <p>{device.name}</p>
-//           </div>
-//         )
-//       })
-//     }
-//   </div>
-
-
-//     {
-//       loading && (
-//         <Loading/>
-//       )
-//     }
-
-//       {openUploadDevice && (
-//           <UploadDevice fetchData={fetchDevice}  close={()=>setOpenUploadDevice(false)} />
-
-//       )
-
-//       }
-//     </section>
-//   );
-// };
-
-// export default Device;
-
-
 import React, { useEffect, useState } from "react";
 import UploadDevice from "../components/UploadDevice";
 import Loading from "../components/Loading";
 import NoData from "../components/NoData";
 import Axios from "../utils/Axios";
 import SummaryApi from "../common/SummariApi";
+import EditDevice from "../components/EditDevice";
 
 const Device = () => {
   const [openUploadDevice, setOpenUploadDevice] = useState(false);
   const [loading, setLoading] = useState(false);
   const [deviceData, setDeviceData] = useState([]);
-
+  const [openEdit,setOpenEdit] = useState(false)
   const fetchDevice = async () => {
     try {
       setLoading(true);
@@ -135,20 +49,26 @@ const Device = () => {
       {!deviceData.length && !loading && <NoData />}
 
       {/* Device Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6 px-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6 px-2 py-1">
         {deviceData.map((device, index) => (
           <div
             key={index}
-            className="bg-[#111]/60 backdrop-blur-md border border-white/10 rounded-xl shadow-[0_0_25px_rgba(0,255,204,0.08)] p-4 flex flex-col items-center hover:scale-105 transition-transform duration-200"
+            className="bg-[#111]/60 backdrop-blur-md w-36 border border-white/10 rounded-xl shadow-[0_0_25px_rgba(0,255,204,0.08)] p-1 flex flex-col items-center hover:scale-105 transition-transform duration-200"
           >
             <img
               src={device.image}
               alt={device.name}
-              className="w-28 h-28 object-contain mb-3 rounded"
+              className="w-36 h-36 object-contain rounded"
             />
             <p className="text-center text-sm font-semibold text-[#00ffc3]">
               {device.name}
             </p>
+            <div className="items-center gap-6 h-12 flex gap-3" >
+              <button onClick={()=>{
+                setOpenEdit(true)
+              }} className="flex-1 bg-green-100 hover:bg-green-200 text-green-600 p-1 px-2 rounded " >Edit</button>
+              <button className="flex-1 bg-red-100 hover:bg-red-200 text-red-600 p-1 px-2 rounded" >Delete</button>
+            </div>
           </div>
         ))}
       </div>
@@ -158,8 +78,17 @@ const Device = () => {
 
       {/* Modal Upload */}
       {openUploadDevice && (
-        <UploadDevice fetchData={fetchDevice} close={() => setOpenUploadDevice(false)} />
+        <UploadDevice
+          fetchData={fetchDevice}
+          close={() => setOpenUploadDevice(false)}
+        />
       )}
+
+      {
+        openEdit && (
+          <EditDevice close={()=>setOpenEdit(false)} />
+        )
+      }
     </section>
   );
 };

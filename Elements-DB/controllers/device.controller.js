@@ -62,3 +62,30 @@ export const getDevice = async (req,res) => {
         })
     }
 }
+
+export const updateDevice = async (req,res) =>{
+    try {
+        const {deviceId, name, image} = req.body 
+
+        const update = await deviceModel.updateOne({
+            _id : deviceId,
+            },{
+                name,
+                image        
+            })
+
+            return res.status(200).json({
+                message : "Device Updated Successfully",
+                data : update,
+                error : false,
+                success : true
+            })
+
+    } catch (error) {
+        return res.status(500).json({
+            message : error.message || message ,
+            error : true,
+            success : false
+        })
+    }
+}
