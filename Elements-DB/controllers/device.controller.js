@@ -1,3 +1,4 @@
+import { error } from "console";
 import deviceModel from "../models/device.model.js";
 
 export  const AddDevice = async (req,res) => {
@@ -83,6 +84,42 @@ export const updateDevice = async (req,res) =>{
 
     } catch (error) {
         return res.status(500).json({
+            message : error.message || message ,
+            error : true,
+            success : false
+        })
+    }
+}
+
+export const deleteDevice = async (req,res) =>{
+    try {
+        const { _id } = req.body
+
+        const checkDevice = await deviceModel.findOne({
+            device : {
+                "$in" : [_id]
+            }
+         }).countDocuments()
+
+         if(checkDevice > 0) {
+            return res.status(400).json({
+                    message : "Device is in use, cannot delete it ",
+                    error : true,
+                    success : false
+            })
+         }
+
+         const deleteDevice = await deviceModel.deleteOne({_id : _id})
+
+         return res.json({
+            message : "Device Deleted Successfully",
+            data : deleteDevice,
+            error : false,
+            success : true
+         })
+
+    } catch (error) {
+        res.status(500).json({
             message : error.message || message ,
             error : true,
             success : false

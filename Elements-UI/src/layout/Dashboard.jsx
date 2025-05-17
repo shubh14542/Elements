@@ -1,8 +1,13 @@
 import React from 'react';
 import UserMenu from '../components/UserMenu';
 import { Outlet } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 const Dashboard = () => {
+
+  const user = useSelector(state => state.user)
+  console.log ("user dashboard",user)
+
   return (
     <section className="min-h-screen bg-gradient-to-br from-[#0a0a0a] via-[#131313] to-[#0f0f0f] text-white font-sans">
       <div className="container mx-auto p-4 grid lg:grid-cols-[260px,1fr] gap-6">

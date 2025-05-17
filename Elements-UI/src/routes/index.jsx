@@ -14,6 +14,7 @@ import Bookings from '../pages/Bookings'
 import Addresses from '../pages/Addresses'
 import Device from '../pages/Device'
 import Slots from '../pages/Slots'
+import Admin from '../pages/Admin'
 // import Signup from '../pages/Signup'
 const router =  createBrowserRouter([
    {
@@ -71,6 +72,10 @@ const router =  createBrowserRouter([
                 {
                     path : 'slots',
                     element : <Slots/>
+                },
+                {
+                    path : 'admin-panel',
+                    element : <Admin/>
                 }
             ]
         }

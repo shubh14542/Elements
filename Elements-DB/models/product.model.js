@@ -8,10 +8,10 @@ const productSchema = new mongoose.Schema({
         type : Array,
         default : [],
     },
-    category : [
+    device : [
         {
             type : mongoose.Schema.ObjectId,
-            ref : 'Category'
+            ref : 'Device'
         }
     ],
     subCategory : [
