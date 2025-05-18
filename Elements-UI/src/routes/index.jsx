@@ -15,6 +15,7 @@ import Addresses from '../pages/Addresses'
 import Device from '../pages/Device'
 import Slots from '../pages/Slots'
 import Admin from '../pages/Admin'
+import AdminPermission from '../components/AdminPermission'
 // import Signup from '../pages/Signup'
 const router =  createBrowserRouter([
    {
@@ -54,28 +55,28 @@ const router =  createBrowserRouter([
             element : <Dashboard/>,
             children : [
                 {
-                    path : 'profile',
-                    element : <Profile/>
+                    path : 'profile', 
+                    element :<Profile/>
                 },
                 {
                     path : 'bookings',
-                    element : <Bookings/>
+                    element :<Bookings/>
                 },
                 {
                     path : 'addresses',
-                    element : <Addresses/>
+                    element :<AdminPermission> <Addresses/></AdminPermission>
                 },
                 {
                     path : 'device',
-                    element : <Device/>
+                    element : <AdminPermission><Device/></AdminPermission>
                 },
                 {
                     path : 'slots',
-                    element : <Slots/>
+                    element : <AdminPermission><Slots/></AdminPermission>
                 },
                 {
                     path : 'admin-panel',
-                    element : <Admin/>
+                    element :<AdminPermission> <Admin/></AdminPermission>
                 }
             ]
         }
