@@ -16,6 +16,13 @@ import Device from '../pages/Device'
 import Slots from '../pages/Slots'
 import Admin from '../pages/Admin'
 import AdminPermission from '../components/AdminPermission'
+import Menu from '../pages/Menu'
+import PlayStation from '../pages/Playstation'
+import Gamers from '../layout/Gamers'
+import GamingPC from '../pages/GamingPC'
+import Rooms from '../pages/Rooms'
+import About from '../pages/About'
+import Contact from '../pages/Contact'
 // import Signup from '../pages/Signup'
 const router =  createBrowserRouter([
    {
@@ -51,6 +58,38 @@ const router =  createBrowserRouter([
             element : <UserMenuPage/>
         },
         {
+            path : '/menu',
+            element : <Menu/>
+        },
+        {
+            path : '/about',
+            element : <About/>
+        },
+        {
+            path : '/contact',
+            element : <Contact/>
+        },
+         {
+            path: '/gamers',
+            element: <Gamers/>,
+            children: [
+                {
+                    path: 'playstation',
+                    element: <PlayStation />
+                },
+                {
+                    path: 'gaming-pcs',
+                    element: <GamingPC/>
+                },
+                {
+                    path: 'rooms',
+                    element: <Rooms/>
+                }
+            ]
+        }
+    ]
+   },
+        {
             path : 'dashboard',
             element : <Dashboard/>,
             children : [
@@ -80,9 +119,7 @@ const router =  createBrowserRouter([
                 }
             ]
         }
-       
-    ]
-   }
+   
 ])
 
 export default router

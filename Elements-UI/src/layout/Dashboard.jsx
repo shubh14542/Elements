@@ -23,11 +23,11 @@ const Dashboard = () => {
         </aside>
 
         {/* Main Content Area */}
-        <main className="bg-black/60 backdrop-blur-lg p-6 rounded-2xl border border-cyan-500/20 shadow-[0_0_25px_#06b6d455] min-h-[70vh] transition-all duration-300 hover:shadow-[0_0_40px_#06b6d4aa]">
+        <main className="bg-black/40 backdrop-blur-md p-6 rounded-2xl border border-cyan-500/20 shadow-[0_0_25px_#06b6d455] min-h-[70vh] transition-all duration-300 hover:shadow-[0_0_40px_#06b6d4aa]">
           <div className="text-3xl font-semibold text-cyan-400 mb-5 border-b border-white/10 pb-3 tracking-wide drop-shadow-[0_0_4px_#06b6d4]">
             🧩 Dashboard
           </div>
-          <Outlet />
+          <Outlet  />
         </main>
 
       </div>
