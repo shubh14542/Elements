@@ -12,17 +12,16 @@ import Profile from '../pages/Profile'
 import Dashboard from '../layout/Dashboard'
 import Bookings from '../pages/Bookings'
 import Addresses from '../pages/Addresses'
-import Device from '../pages/Device'
 import Slots from '../pages/Slots'
 import Admin from '../pages/Admin'
-import AdminPermission from '../components/AdminPermission'
+// import AdminPermission from '../components/AdminPermission'
 import Menu from '../pages/Menu'
-import PlayStation from '../pages/Playstation'
-import Gamers from '../layout/Gamers'
-import GamingPC from '../pages/GamingPC'
-import Rooms from '../pages/Rooms'
 import About from '../pages/About'
 import Contact from '../pages/Contact'
+import Category from '../pages/Category'
+import Device from '../pages/Device' 
+import SubCategory from '../pages/SubCategory'
+import UploadDevice from '../pages/UploadDevice'
 // import Signup from '../pages/Signup'
 const router =  createBrowserRouter([
    {
@@ -69,24 +68,6 @@ const router =  createBrowserRouter([
             path : '/contact',
             element : <Contact/>
         },
-         {
-            path: '/gamers',
-            element: <Gamers/>,
-            children: [
-                {
-                    path: 'playstation',
-                    element: <PlayStation />
-                },
-                {
-                    path: 'gaming-pcs',
-                    element: <GamingPC/>
-                },
-                {
-                    path: 'rooms',
-                    element: <Rooms/>
-                }
-            ]
-        }
     ]
    },
         {
@@ -103,20 +84,33 @@ const router =  createBrowserRouter([
                 },
                 {
                     path : 'addresses',
-                    element :<AdminPermission> <Addresses/></AdminPermission>
-                },
-                {
-                    path : 'device',
-                    element : <AdminPermission><Device/></AdminPermission>
+                    element : <Addresses/>
                 },
                 {
                     path : 'slots',
-                    element : <AdminPermission><Slots/></AdminPermission>
+                    element :<Slots/>
                 },
                 {
                     path : 'admin-panel',
-                    element :<AdminPermission> <Admin/></AdminPermission>
+                    element : <Admin/>
+                },
+                {
+                    path : 'category',
+                    element : <Category/>
+                },
+                {
+                    path : 'subcategory',
+                    element : <SubCategory/>
+                },
+                {
+                    path : 'device',
+                    element : <Device/>
+                },
+                {
+                    path: 'upload-device',
+                    element: <UploadDevice/>
                 }
+               
             ]
         }
    

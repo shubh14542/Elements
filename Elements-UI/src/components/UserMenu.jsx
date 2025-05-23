@@ -10,13 +10,12 @@ import AxiosToastError from "../utils/AxiosToastError";
 import { FiExternalLink } from "react-icons/fi";
 import {
   FaGamepad,
-  FaShieldAlt,
   FaSignOutAlt,
   FaUserAlt,
   FaCalendarAlt,
   FaServer,
+  FaShieldAlt,
 } from "react-icons/fa";
-import isAdmin from "../utils/isAdmin";
 
 const UserMenu = ({ close }) => {
   const user = useSelector((state) => state.user);
@@ -27,7 +26,7 @@ const UserMenu = ({ close }) => {
     try {
       const response = await Axios({ ...SummaryApi.logout });
       if (response.data.success) {
-        close?.();
+        close();
         dispatch(logout());
         localStorage.clear();
         toast.success(response.data.message);
@@ -42,29 +41,15 @@ const UserMenu = ({ close }) => {
     close?.();
   };
 
-  const isUserAdmin = isAdmin(user?.role);
-
-  const adminLinks = [
-    {
-      path: "/dashboard/admin-panel",
-      label: "Admin Panel",
-      icon: <FaShieldAlt />,
-    },
+  const menuLinks = [
+    { path: "/dashboard/profile", label: "Profile", icon: <FaUserAlt /> },
     { path: "/dashboard/bookings", label: "Bookings", icon: <FaCalendarAlt /> },
-    // {
-    //   path: "/dashboard/addresses",
-    //   label: "Addresses",
-    //   icon: <FaMapMarkedAlt />,
-    // },
+    { path: "/dashboard/category", label: "Category", icon: <FaGamepad /> },
+    { path: "/dashboard/subcategory", label: "Sub-Category", icon: <FaGamepad /> },
+    { path: "/dashboard/upload-device", label: "Upload Device", icon: <FaGamepad /> },
     { path: "/dashboard/device", label: "Devices", icon: <FaGamepad /> },
     { path: "/dashboard/slots", label: "Slots", icon: <FaServer /> },
-    // { path: "/dashboard/profile", label: "Profile", icon: <FaUserAlt /> },
-  ];
-
-  const userLinks = [
-    { path: "/dashboard/profile", label: "Profile", icon: <FaUserAlt /> },
-    { path: "/dashboard/bookings", label: "My Bookings", icon: <FaCalendarAlt /> },
-    // { path: "/dashboard/addresses", label: "My Addresses", icon: <FaMapMarkedAlt /> },
+    { path: "/dashboard/admin-panel", label: "Admin Panel", icon: <FaShieldAlt /> },
   ];
 
   return (
@@ -77,9 +62,6 @@ const UserMenu = ({ close }) => {
         <div className="text-sm text-gray-400 mt-2 flex items-center gap-2">
           <span className="flex items-center gap-2 max-w-[200px] truncate text-green-400 font-bold tracking-wide text-shadow-glow">
             🎮 {user?.name || user?.mobile}
-            {user?.role === "ADMIN" && (
-              <span className="text-pink-500 font-semibold">(Admin)</span>
-            )}
           </span>
           <Link
             to="/dashboard/profile"
@@ -94,46 +76,25 @@ const UserMenu = ({ close }) => {
 
       <Divider className="border-[#00ffc3]/30 animate-pulse" />
 
-      {/* Admin or User Links */}
-      {isUserAdmin ? (
-        <div className="grid gap-3 text-sm">
-          <p className="text-xs uppercase tracking-wider text-[#00ffc3]/80 font-semibold mb-1">
-            Admin Zone
-          </p>
-          {adminLinks.map(({ path, label, icon }) => (
-            <Link
-              key={path}
-              to={path}
-              onClick={handleClose}
-              className="flex items-center gap-3 px-4 py-2 rounded-lg bg-[#1a1a1a]/60 hover:bg-[#00ffc3]/10 hover:text-[#00ffc3] transition-all border border-transparent hover:border-[#00ffc3]/30 group"
-            >
-              <span className="group-hover:rotate-6 transition-transform duration-200">
-                {icon}
-              </span>
-              <span>{label}</span>
-            </Link>
-          ))}
-        </div>
-      ) : (
-        <div className="grid gap-3 text-sm">
-          <p className="text-xs uppercase tracking-wider text-[#00ffc3]/80 font-semibold mb-1">
-            Your Dashboard
-          </p>
-          {userLinks.map(({ path, label, icon }) => (
-            <Link
-              key={path}
-              to={path}
-              onClick={handleClose}
-              className="flex items-center gap-3 px-4 py-2 rounded-lg bg-[#1a1a1a]/60 hover:bg-[#00ffc3]/10 hover:text-[#00ffc3] transition-all border border-transparent hover:border-[#00ffc3]/30 group"
-            >
-              <span className="group-hover:rotate-6 transition-transform duration-200">
-                {icon}
-              </span>
-              <span>{label}</span>
-            </Link>
-          ))}
-        </div>
-      )}
+      {/* Common Menu Links */}
+      <div className="grid gap-3 text-sm">
+        <p className="text-xs uppercase tracking-wider text-[#00ffc3]/80 font-semibold mb-1">
+          Dashboard
+        </p>
+        {menuLinks.map(({ path, label, icon }) => (
+          <Link
+            key={path}
+            to={path}
+            onClick={handleClose}
+            className="flex items-center gap-3 px-4 py-2 rounded-lg bg-[#1a1a1a]/60 hover:bg-[#00ffc3]/10 hover:text-[#00ffc3] transition-all border border-transparent hover:border-[#00ffc3]/30 group"
+          >
+            <span className="group-hover:rotate-6 transition-transform duration-200">
+              {icon}
+            </span>
+            <span>{label}</span>
+          </Link>
+        ))}
+      </div>
 
       {/* Logout */}
       <button
@@ -150,3 +111,4 @@ const UserMenu = ({ close }) => {
 };
 
 export default UserMenu;
+
