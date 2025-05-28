@@ -1,9 +1,9 @@
 import uploadImageCloudinary from "../utils/uploadImageCloudinary.js"
 
-const uploadImage = async (req, res) => {
+const uploadImageController = async (req, res) => {
         try {
             const file = req.file
-
+            console.log(file)
             const uploadImage = await uploadImageCloudinary(file)
 
             return res.json({
@@ -21,4 +21,4 @@ const uploadImage = async (req, res) => {
         }
 }
 
-export default uploadImage;
+export default uploadImageController
