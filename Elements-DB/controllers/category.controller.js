@@ -47,3 +47,25 @@ import categoryModel from "../models/category.model.js";
         })
     }
 }
+
+export const getCategoryController = async (req, res) => {
+    try {
+        
+        const data = await categoryModel.find()
+
+        return response.json({
+            data : data,
+            error : false,
+            success : true
+        })
+
+    } catch (error) {
+        return res.status(500).json({
+            message: error.message || error,
+            error: true,
+            success : false
+
+
+        })
+    }
+}

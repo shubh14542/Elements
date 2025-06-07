@@ -1,41 +1,24 @@
-// import logo from './logo.svg';
-import {Outlet} from 'react-router-dom'
-import './App.css';
-// import Header from './components/header';
-import Header from './components/header';
-import  {Toaster} from 'react-hot-toast'
-import Footer from './components/footer';
-import { useEffect } from 'react';
-import fetchUserDetails from './utils/fetchUserDetails';
-import { setUserDetails} from './store/userSlice';
-import { useDispatch } from 'react-redux';
+import { Outlet } from "react-router-dom";
+import Header from "./component/Header";
+import Footer from "./component/Footer";
+import  { Toaster } from "react-hot-toast";
+
 function App() {
-
-  const dispatch = useDispatch() 
-
-  const fetchUser = async () =>{
-    const userData = await fetchUserDetails();
-    
-    if(userData?.data) {
-       dispatch(setUserDetails(userData.data))
-    }
-   
-  }
-
-
-  useEffect(()=>{
-      fetchUser()
-  })
-
   return (
-   <>
-   <Header/>
-   <main className='min-h-[80vh]' >
-      <Outlet/>
-   </main>
-   <Footer/>
-   <Toaster/>
-   </>
+   <div className="flex flex-col min-h-screen bg-[#0f0f0f] text-white">
+      {/* Fixed Header */}
+      <Header />
+
+      {/* Main content that fills available space */}
+      <main className="flex-grow  m-8 pt-20 pb-20 px-4">
+        <Outlet />
+      </main>
+
+      {/* Footer */}
+      <Footer />
+      <Toaster/>
+    </div>
   );
 }
+
 export default App;

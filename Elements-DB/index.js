@@ -35,7 +35,7 @@ app.get('/',(req,res)=>{
 
 app.use('/api/user',userRouter)
 app.use("/api/file",uploadRouter)
-app.use("api/category",categoryRouter)
+app.use("/api/category",categoryRouter)
 connectDB().then(()=>{
     app.listen(PORT, () =>{
         console.log(`Services running on PORT ${PORT} Successfully`)

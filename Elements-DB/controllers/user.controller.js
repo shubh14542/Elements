@@ -8,8 +8,6 @@ import uploadImageCloudinary from '../utils/uploadImageCloudinary.js'
 import generateOTP from '../utils/generateOTP.js'
 import forgotPasswordTemplate from '../utils/forgotPasswordTemplate.js'
 import jwt from 'jsonwebtoken'
-import { response } from 'express'
-import { request } from 'http'
 
 export async function registerUserController(req,res){
     try {
@@ -192,7 +190,7 @@ export async function logOutController(req,res){
         res.clearCookie('refreshToken',cookiesOption)
 
         const removeRefreshToken = await userModel.findByIdAndUpdate(userid,{
-            refresh_token : " "
+            refresh_token : ""
         })
 
         return res.json({
